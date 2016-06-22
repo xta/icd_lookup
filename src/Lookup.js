@@ -29,11 +29,12 @@ module.exports = React.createClass({
 
   render: function() {
     return <div>
-      <div>{this.state.results}</div>
       <form onSubmit={this.submit}>
         <input onChange={this.updateInput} value={this.state.query} type="query" placeholder="Your search" />
         <input type="submit" value="Lookup" />
       </form>
+      <h2>Results</h2>
+      <div>{this.state.results}</div>
     </div>;
   }
 });
