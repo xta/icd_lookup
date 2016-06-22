@@ -1,6 +1,7 @@
 var React = require('react');
 
 var IcdCode = require('./IcdCode');
+var data = require('../data/icd9.json')
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -10,13 +11,24 @@ module.exports = React.createClass({
     };
   },
 
+  componentWillMount: function() {
+    var results = [];
+    for (i = 0; i < data.length; i++) {
+      var title = data[i].title;
+      var newResult = <IcdCode title={title} />;
+      results.push(newResult);
+    }
+
+    this.setState({ results: results });
+  },
+
   submit: function(ev) {
     ev.preventDefault();
 
-    var newResults = <IcdCode title={this.state.query} />;
+    var newResult = <IcdCode title={this.state.query} />;
 
     this.setState({
-      results: this.state.results.concat([newResults]),
+      results: this.state.results.concat([newResult]),
       query: ''
     });
   },
